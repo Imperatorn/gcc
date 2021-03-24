@@ -23,32 +23,32 @@ a copy of the GCC Runtime Library Exception along with this program;
 see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 <http://www.gnu.org/licenses/>.  */
 
+#ifdef __MINGW32__
+#include <_mingw.h>
+#endif
 #include <stdio.h>
 
-/* The symbols for stdin, stdout, and stderr are defined for D in the
-   core.stdc.stdio module.  Save the macros and redeclare them here.  */
-#define c_stdin stdin
-#undef stdin
-extern FILE *stdin;
+/* The D runtime library defines stdin, stdout, and stderr as extern(C) symbols
+   in the core.stdc.stdio module, and require initializing at start-up.  */
+__attribute__((weakref ("stdin")))
+static FILE *core_stdc_stdin;
 
-#define c_stdout stdout
-#undef stdout
-extern FILE *stdout;
+__attribute__((weakref ("stdout")))
+static FILE *core_stdc_stdout;
 
-#define c_stderr stderr
-#undef stderr
-extern FILE *stderr;
+__attribute__((weakref ("stderr")))
+static FILE *core_stdc_stderr;
 
-/* Set to 1 if run-time is using ucrtbase.dll.  */
+/* Set to 1 if runtime is using libucrt.dll.  */
 unsigned char msvcUsesUCRT;
 
 void init_msvc()
 {
-#if __MSVCRT_VERSION__ >= 0x1400
+  core_stdc_stdin = stdin;
+  core_stdc_stdout = stdout;
+  core_stdc_stderr = stderr;
+
+#if __MSVCRT_VERSION__ >= 0xE00
   msvcUsedUCRT = 1;
 #endif
-
-  stdin = c_stdin;
-  stdout = c_stdout;
-  stderr = c_stderr;
 }
