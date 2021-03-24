@@ -1285,13 +1285,20 @@ else
     alias core.stdc.math.fabs          fabs;
     version (CRuntime_Microsoft)
     {
+        version (MinGW)
+        {
+            ///
+            alias core.stdc.math.fabsf fabs;
+            ///
+            alias core.stdc.math.fabsl fabs;
+        }
     }
     else
     {
         ///
-        alias core.stdc.math.fabsf         fabs;
+        alias core.stdc.math.fabsf     fabs;
         ///
-        alias core.stdc.math.fabsl         fabs;
+        alias core.stdc.math.fabsl     fabs;
     }
 
     // @@@DEPRECATED_2.105@@@
