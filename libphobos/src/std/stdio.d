@@ -174,6 +174,7 @@ else version (MICROSOFT_STDIO)
         int _fseeki64(FILE*, long, int);
         long _ftelli64(FILE*);
     }
+    
     alias FPUTC = _fputc_nolock;
     alias FPUTWC = _fputwc_nolock;
     alias FGETC = _fgetc_nolock;
