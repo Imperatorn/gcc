@@ -1,6 +1,6 @@
 /* Operating system specific defines to be used when targeting GCC for
    hosting on Windows32, using GNU tools and the Windows32 API Library.
-   Copyright (C) 1997-2020 Free Software Foundation, Inc.
+   Copyright (C) 1997-2021 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -61,9 +61,11 @@ along with GCC; see the file COPYING3.  If not see
 	builtin_version ("Win64");				\
       else if (!TARGET_64BIT)					\
 	builtin_version ("Win32");				\
+  builtin_version ("CRuntime_Microsoft");			\
     }								\
   while (0)
-  
+
+
 #ifndef TARGET_USE_PTHREAD_BY_DEFAULT
 #define SPEC_PTHREAD1 "pthread"
 #define SPEC_PTHREAD2 "!no-pthread"
