@@ -29,7 +29,12 @@ to the `devel/gdc` branch. This branch is rebased irregularly, do not rely on th
 stable.
 
 If you need to clone this repo for some reason, you may want to do a shallow clone using the
-`--depth 1 --no-single-branch` git options, as this repository is large. To compile GDC, add `--enable-languages=d` to the GCC configure flags and [start building][gdc-build].
+`--depth 1 --no-single-branch` git options, as this repository is large. 
+
+To compile GDC:
+../configure --prefix=/mingw64 --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --disable-bootstrap --disable-libssp --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libitm --disable-libsanitizer --disable-libstdcxx-pch --disable-multilib --with-arch=x86-64 --with-gnu-as --with-gnu-ld --with-gmp=/mingw64 --with-mpfr=/mingw64 --with-mpc=/mingw64 --with-isl=/mingw64 --with-native-system-header-dir=/mingw64/x86_64-w64-mingw32/include --libexecdir=/mingw64/lib --enable-languages=d --enable-libphobos` [start building][gdc-build].
+
+
 
 ### Using GDC
 
