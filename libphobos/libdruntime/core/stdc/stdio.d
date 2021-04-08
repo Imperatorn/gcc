@@ -1428,7 +1428,7 @@ else version (CRuntime_Microsoft)
     ///
     int _fputc_nolock(int c, FILE* fp)
     {
-        pragma(inline, true);
+        //pragma(inline, true);
         fp._cnt = fp._cnt - 1;
         if (fp._cnt >= 0)
         {
@@ -1438,10 +1438,14 @@ else version (CRuntime_Microsoft)
             return ch & 0xFF;
         }
         else
+        {
             return _flsbuf(c, fp);
+        }
     }
+
     ///
     int _fgetc_nolock(FILE* fp)
+
     {
         pragma(inline, true);
         fp._cnt = fp._cnt - 1;
@@ -1474,7 +1478,7 @@ else version (CRuntime_Microsoft)
     ///
     int _fgetwc_nolock(FILE* fp)
     {
-        pragma(inline, true);
+        //pragma(inline, true);
         fp._cnt = fp._cnt - 1;
         if (fp._cnt >= 0)
         {
@@ -1483,7 +1487,9 @@ else version (CRuntime_Microsoft)
             return ch & 0xFF;
         }
         else
+        {
             return _filbuf(fp);
+        }
     }
   }
   else

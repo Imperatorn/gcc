@@ -122,24 +122,24 @@ version (Posix)
 
 version (DIGITAL_MARS_STDIO)
 {
-    extern (C)
-    {
-        /* **
-         * Digital Mars under-the-hood C I/O functions.
-         * Use _iobuf* for the unshared version of FILE*,
-         * usable when the FILE is locked.
-         */
-      nothrow:
-      @nogc:
-        int _fputc_nlock(int, _iobuf*);
-        int _fputwc_nlock(int, _iobuf*);
-        int _fgetc_nlock(_iobuf*);
-        int _fgetwc_nlock(_iobuf*);
-        int __fp_lock(FILE*);
-        void __fp_unlock(FILE*);
+    // extern (C)
+    // {
+    //     /* **
+    //      * Digital Mars under-the-hood C I/O functions.
+    //      * Use _iobuf* for the unshared version of FILE*,
+    //      * usable when the FILE is locked.
+    //      */
+    //   nothrow:
+    //   @nogc:
+    //     int _fputc_nlock(int, _iobuf*);
+    //     int _fputwc_nlock(int, _iobuf*);
+    //     int _fgetc_nlock(_iobuf*);
+    //     int _fgetwc_nlock(_iobuf*);
+    //     int __fp_lock(FILE*);
+    //     void __fp_unlock(FILE*);
 
-        int setmode(int, int);
-    }
+    //     int setmode(int, int);
+    // }
     alias FPUTC = _fputc_nlock;
     alias FPUTWC = _fputwc_nlock;
     alias FGETC = _fgetc_nlock;
@@ -155,25 +155,26 @@ version (DIGITAL_MARS_STDIO)
 }
 else version (MICROSOFT_STDIO)
 {
-    extern (C)
-    {
-        /* **
-         * Microsoft under-the-hood C I/O functions
-         */
-      nothrow:
-      @nogc:
-        int _fputc_nolock(int, _iobuf*);
-        int _fputwc_nolock(int, _iobuf*);
-        int _fgetc_nolock(_iobuf*);
-        int _fgetwc_nolock(_iobuf*);
-        void _lock_file(FILE*);
-        void _unlock_file(FILE*);
-        int _setmode(int, int);
-        int _fileno(FILE*);
-        FILE* _fdopen(int, const (char)*);
-        int _fseeki64(FILE*, long, int);
-        long _ftelli64(FILE*);
-    }
+    // extern (C)
+    // {
+    //     /* **
+    //      * Microsoft under-the-hood C I/O functions
+    //      */
+    //   nothrow:
+    //   @nogc:
+    //     int _fputc_nolock(int, _iobuf*);
+    //     int _fputwc_nolock(int, _iobuf*);
+    //     int _fgetc_nolock(_iobuf*);
+    //     int _fgetwc_nolock(_iobuf*);
+    //     void _lock_file(FILE*);
+    //     void _unlock_file(FILE*);
+    //     int _setmode(int, int);
+    //     int _fileno(FILE*);
+    //     FILE* _fdopen(int, const (char)*);
+    //     int _fseeki64(FILE*, long, int);
+    //     long _ftelli64(FILE*);
+    // }
+    
     alias FPUTC = _fputc_nolock;
     alias FPUTWC = _fputwc_nolock;
     alias FGETC = _fgetc_nolock;
@@ -185,13 +186,13 @@ else version (MICROSOFT_STDIO)
     alias setmode = _setmode;
     alias fileno = _fileno;
 
-    enum
-    {
-        _O_RDONLY = 0x0000,
-        _O_APPEND = 0x0004,
-        _O_TEXT   = 0x4000,
-        _O_BINARY = 0x8000,
-    }
+    // enum
+    // {
+    //     _O_RDONLY = 0x0000,
+    //     _O_APPEND = 0x0004,
+    //     _O_TEXT   = 0x4000,
+    //     _O_BINARY = 0x8000,
+    // }
 }
 else version (GCC_IO)
 {

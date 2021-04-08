@@ -400,9 +400,12 @@ void put(R, E)(ref R r, E e)
                 put(r, e.front);
         }
     }
-    else
+    else //Experimental
     {
-        static assert(false, "Cannot put a " ~ E.stringof ~ " into a " ~ R.stringof ~ ".");
+        import std.algorithm.mutation : copy;
+
+        r.copy(e);
+        //static assert(false, "Cannot put a " ~ E.stringof ~ " into a " ~ R.stringof ~ ".");
     }
 }
 
