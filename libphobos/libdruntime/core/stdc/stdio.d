@@ -1445,6 +1445,38 @@ else version (CRuntime_Microsoft)
 
     ///
     int _fgetc_nolock(FILE* fp)
+
+    {
+        pragma(inline, true);
+        fp._cnt = fp._cnt - 1;
+        if (fp._cnt >= 0)
+        {
+            immutable ch = *fp._ptr;
+            fp._ptr = fp._ptr + 1;
+            return ch & 0xFF;
+        }
+        else
+            return _filbuf(fp);
+    }
+
+        ///_fputwc_nolock
+    int _fputwc_nolock(int c, FILE* fp)
+    {
+        pragma(inline, true);
+        fp._cnt = fp._cnt - 1;
+        if (fp._cnt >= 0)
+        {
+            immutable ch = cast(char)c;
+            *fp._ptr = ch;
+            fp._ptr = fp._ptr + 1;
+            return ch & 0xFF;
+        }
+        else
+            return _flsbuf(c, fp);
+    }
+
+    ///
+    int _fgetwc_nolock(FILE* fp)
     {
         //pragma(inline, true);
         fp._cnt = fp._cnt - 1;
